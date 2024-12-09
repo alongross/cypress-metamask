@@ -1,22 +1,36 @@
 class DappPage {
-    connectWalletButton = "//button[contains(text(), 'Connect Wallet')]";
+    connectWalletButton = "//button[@class='Button_button-component__zTGW4' and text()='SELECT']";
     confirmationMessage = "//div[contains(@class, 'confirmation-message')]";
 
     visitDapp() {
-        cy.visit('/');
+        // Navigate to the dApp
+        cy.visit('https://treasury.coti.io/');
     }
 
     connectWallet() {
-        cy.xpath(this.connectWalletButton).click();
-        cy.acceptMetamaskAccess();
+        // Click the "Connect Wallet" button
+        cy.xpath(this.connectWalletButton)
+            .should('be.visible') // Ensure it's visible before interacting
+            .click();
+    }
+
+    verifyConnectionSuccess() {
+        // Verify success message or wallet connection state
+        cy.xpath(this.confirmationMessage)
+            .should('be.visible')
+            .and('contain.text', 'Connected');
     }
 
     signTransaction() {
-        cy.confirmMetamaskSignatureRequest();
+        // Trigger and confirm transaction signing (if required)
+        cy.xpath("//button[contains(text(), 'Sign Transaction')]").click();
     }
 
     verifyTransactionSuccess() {
-        cy.xpath(this.confirmationMessage).should('contain', 'Transaction Successful');
+        // Verify transaction success message
+        cy.xpath(this.confirmationMessage)
+            .should('be.visible')
+            .and('contain.text', 'Transaction Successful');
     }
 }
 

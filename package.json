@@ -11,10 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "@cypress/xpath": "^2.0.3",
-    "cypress": "^13.16.1",
-    "cypress-metamask": "^1.0.5-development"
+    "cypress": "^13.16.1"
   },
   "devDependencies": {
-    "eslint": "^7.18.0"
+    "cypress-metamask": "^1.0.5-development",
+    "eslint": "^7.18.0",
+    "puppeteer": "^23.10.1"
   }
 }
